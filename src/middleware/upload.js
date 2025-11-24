@@ -1,7 +1,9 @@
 import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
 import { Readable } from "stream";
+import dotenv from "dotenv";
 
+dotenv.config();
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
