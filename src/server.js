@@ -5,6 +5,8 @@ import cors from "cors";
 import morgan from "morgan";
 import connectDB from "./config/database.js";
 import authRoutes from "./routes/auth.js";
+import postsRoutes from "./routes/posts.js";
+import commentsRoutes from "./routes/comments.js";
 import { generalLimiter } from "./middleware/rateLimiter.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
@@ -51,6 +53,8 @@ app.get("/health", (req, res) => {
 
 // API routes
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postsRoutes);
+app.use("/api/comments", commentsRoutes);
 
 // 404 handler
 app.use(notFound);

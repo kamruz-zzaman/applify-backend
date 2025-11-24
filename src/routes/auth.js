@@ -18,7 +18,7 @@ router.post(
   validate,
   async (req, res, next) => {
     try {
-      const { email, password } = req.body;
+      const { firstName, lastName, email, password } = req.body;
 
       // Check if user already exists
       const existingUser = await User.findOne({ email });
@@ -31,6 +31,8 @@ router.post(
 
       // Create new user
       const user = await User.create({
+        firstName,
+        lastName,
         email,
         password,
       });
@@ -48,6 +50,8 @@ router.post(
           token,
           user: {
             id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             createdAt: user.createdAt,
           },
@@ -100,6 +104,8 @@ router.post(
           token,
           user: {
             id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             createdAt: user.createdAt,
           },
