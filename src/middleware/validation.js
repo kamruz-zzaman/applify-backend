@@ -1,8 +1,6 @@
 import { body, validationResult } from "express-validator";
 
-/**
- * Validation rules for user registration
- */
+// Validation rules for user registration
 export const registerValidation = [
   body("email")
     .trim()
@@ -16,9 +14,7 @@ export const registerValidation = [
     .withMessage("Password must contain at least one number"),
 ];
 
-/**
- * Validation rules for user login
- */
+// Validation rules for user login
 export const loginValidation = [
   body("email")
     .trim()
@@ -28,9 +24,7 @@ export const loginValidation = [
   body("password").notEmpty().withMessage("Password is required"),
 ];
 
-/**
- * Middleware to check validation results
- */
+// Middleware to check validation results
 export const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
