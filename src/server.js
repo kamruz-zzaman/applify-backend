@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Rate limiting
-// app.use(generalLimiter);
+app.use(generalLimiter);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
