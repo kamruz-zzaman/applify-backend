@@ -10,11 +10,7 @@ import { authLimiter } from "../middleware/rateLimiter.js";
 
 const router = express.Router();
 
-/**
- * @route   POST /api/auth/register
- * @desc    Register a new user
- * @access  Public
- */
+// Register a new user
 router.post(
   "/register",
   authLimiter,
@@ -39,10 +35,17 @@ router.post(
         password,
       });
 
+      // Generate JWT token for auto-login
+      const token = generateToken({
+        id: user._id,
+        email: user.email,
+      });
+
       res.status(201).json({
         success: true,
-        message: "Registration successful. Please login to continue.",
+        message: "Registration successful",
         data: {
+          token,
           user: {
             id: user._id,
             email: user.email,
@@ -56,11 +59,7 @@ router.post(
   }
 );
 
-/**
- * @route   POST /api/auth/login
- * @desc    Login user and return JWT token
- * @access  Public
- */
+// Login user and return JWT token
 router.post(
   "/login",
   authLimiter,
